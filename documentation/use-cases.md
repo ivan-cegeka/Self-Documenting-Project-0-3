@@ -27,7 +27,7 @@
 ### UC-3: Log an Interaction
 
 - **Actor:** User
-- **Goal:** Record a call, email, meeting, or note against a Contact.
+- **Goal:** Record a call, email, meeting, note, or SMS message against a Contact.
 - **Preconditions:** At least one Contact exists.
 - **Steps:**
   1. User opens the Interactions page.
