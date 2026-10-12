@@ -9,6 +9,8 @@
 #                                   (with Azure, OPENAI_API_KEY holds the Azure key)
 #   3. Optional: AGENTS.md in the repo root with project-specific review rules.
 # The review is advisory: don't add it to required status checks.
+# Companion: doc-review.yml shares the range step, output schema and posting
+# script with this file; keep them identical.
 
 name: PR Review
 
@@ -130,13 +132,14 @@ jobs:
       - name: Post review to the PR
         uses: actions/github-script@v9
         env:
+          TITLE: AI review
           RESULT: ${{ needs.review.outputs.result }}
           BASE_SHA: ${{ needs.review.outputs.base }}
           SCOPE: ${{ needs.review.outputs.scope }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         with:
           script: |
-            const { RESULT, BASE_SHA, SCOPE, HEAD_SHA } = process.env;
+            const { TITLE, RESULT, BASE_SHA, SCOPE, HEAD_SHA } = process.env;
             const target = {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -152,14 +155,14 @@ jobs:
                 owner: target.owner,
                 repo: target.repo,
                 issue_number: target.pull_number,
-                body: "### AI review\n\n_Couldn't parse the reviewer's output. Raw output:_\n\n" + RESULT,
+                body: `### ${TITLE}\n\n_Couldn't parse the reviewer's output. Raw output:_\n\n` + RESULT,
               });
               return;
             }
 
             const header = SCOPE === "delta"
-              ? `### AI review — new commits ${BASE_SHA.slice(0, 7)}..${HEAD_SHA.slice(0, 7)}`
-              : "### AI review — full PR";
+              ? `### ${TITLE} — new commits ${BASE_SHA.slice(0, 7)}..${HEAD_SHA.slice(0, 7)}`
+              : `### ${TITLE} — full PR`;
             const body = `${header}\n\n${review.summary}`;
             const findings = review.findings;
             const postReview = (fields) =>
