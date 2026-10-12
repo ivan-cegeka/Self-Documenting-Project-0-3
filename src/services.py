@@ -1,4 +1,5 @@
 import re
+import streamlit as st
 from datetime import datetime
 from sqlalchemy.orm import Session
 from src import repository
@@ -14,6 +15,7 @@ def add_company(session: Session, name: str, industry: str | None = None):
     duplicate = any(c.name.lower() == name.lower() for c in repository.list_companies(session))
     if duplicate:
         raise ValueError(f"A company named '{name}' already exists")
+    st.toast(f"Company '{name}' created")
     return repository.create_company(session, name=name, industry=industry)
 
 
@@ -27,7 +29,7 @@ def add_contact(
     name = (name or "").strip()
     if not name:
         raise ValueError("Contact name is required")
-    if email and not EMAIL_RE.match(email):
+    if email and EMAIL_RE.match(email):
         raise ValueError(f"'{email}' is not a valid email address")
     if company_id is not None and repository.get_company(session, company_id) is None:
         raise ValueError(f"No company with id {company_id}")
