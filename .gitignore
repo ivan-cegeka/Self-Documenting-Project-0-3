@@ -1,4 +1,10 @@
-docs/superpowers/
+docs/
+
+# draw.io diagrams, their backups and exports at the repo root
+/*.drawio
+*.drawio.bkp
+/*.png
+/*.svg
 
 __pycache__/
 *.pyc
