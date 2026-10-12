@@ -1,0 +1,38 @@
+# documentation/index.yml
+links:
+  - sources:
+      - path: src/models.py
+        last_synced_commit: "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    docs:
+      - documentation/erd.md
+      - documentation/architecture.md
+  - sources:
+      - path: src/repository.py
+        last_synced_commit: "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    docs:
+      - documentation/architecture.md
+  - sources:
+      - path: src/services.py
+        last_synced_commit: "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    docs:
+      - documentation/architecture.md
+      - documentation/use-cases.md
+  - sources:
+      - path: app.py
+        last_synced_commit: "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+      - path: pages/1_Companies.py
+        last_synced_commit: "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+      - path: pages/2_Contacts.py
+        last_synced_commit: "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+      - path: pages/3_Interactions.py
+        last_synced_commit: "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    docs:
+      - documentation/use-cases.md
+      - documentation/architecture.md
+doc_edges:
+  - from: documentation/erd.md
+    to:
+      - documentation/architecture.md
+  - from: documentation/use-cases.md
+    to:
+      - documentation/architecture.md
