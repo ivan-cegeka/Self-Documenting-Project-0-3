@@ -1,0 +1,9 @@
+[project]
+name = "self-documenting-project-3"
+version = "0.1.0"
+description = "CRM Lite (Streamlit) with an AI pull request reviewer in CI"
+requires-python = ">=3.12"
+dependencies = [
+    "sqlalchemy>=2.0.51",
+    "streamlit>=1.61.1",
+]
