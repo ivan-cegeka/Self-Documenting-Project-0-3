@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from src import repository
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-ALLOWED_INTERACTION_TYPES = {"call", "email", "meeting", "note"}
+ALLOWED_INTERACTION_TYPES = {"call", "email", "meeting", "note", "sms"}
 
 
 def add_company(session: Session, name: str, industry: str | None = None):
